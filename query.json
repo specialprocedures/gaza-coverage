@@ -1,0 +1,91 @@
+{
+    "query": {
+        "$query": {
+            "$and": [
+                {
+                    "$or": [
+                        {
+                            "conceptUri": "http://en.wikipedia.org/wiki/Gaza_Strip"
+                        },
+                        {
+                            "conceptUri": "http://en.wikipedia.org/wiki/Gaza_City"
+                        },
+                        {
+                            "conceptUri": "http://en.wikipedia.org/wiki/Gaza"
+                        },
+                        {
+                            "conceptUri": "http://en.wikipedia.org/wiki/Gaza–Israel_conflict"
+                        }
+                    ]
+                },
+                {
+                    "$or": [
+                        {
+                            "sourceUri": "theguardian.com"
+                        },
+                        {
+                            "sourceUri": "nytimes.com"
+                        },
+                        {
+                            "sourceUri": "foxnews.com"
+                        },
+                        {
+                            "sourceUri": "electronicintifada.net"
+                        },
+                        {
+                            "sourceUri": "middleeasteye.net"
+                        },
+                        {
+                            "sourceUri": "aljazeera.com"
+                        },
+                        {
+                            "sourceUri": "jpost.com"
+                        },
+                        {
+                            "sourceUri": "haaretz.com"
+                        },
+                        {
+                            "sourceUri": "rt.com"
+                        },
+                        {
+                            "sourceUri": "globaltimes.cn"
+                        },
+                        {
+                            "sourceUri": "lemonde.fr"
+                        },
+                        {
+                            "sourceUri": "elpais.com"
+                        },
+                        {
+                            "sourceUri": "dw.com"
+                        },
+                        {
+                            "sourceUri": "bbc.com"
+                        },
+                        {
+                            "sourceUri": "reuters.com"
+                        },
+                        {
+                            "sourceUri": "timesofisrael.com"
+                        },
+                        {
+                            "sourceUri": "english.wafa.ps"
+                        },
+                        {
+                            "sourceUri": "thetimes.co.uk"
+                        }
+                    ]
+                },
+                {
+                    "lang": "eng"
+                }
+            ]
+        },
+        "$filter": {
+            "forceMaxDataTimeWindow": "31"
+        }
+    },
+    "resultType": "articles",
+    "articlesSortBy": "date",
+    "apiKey": "MY_API_KEY"
+}
