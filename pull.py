@@ -69,7 +69,7 @@ def get_page(query_params: dict, page: int):
         page (int): The results page to pull
 
     Returns:
-        data (dict): _description_
+        data (dict): The response data from the request
     """
     # Set endpoint
     ENDPOINT = "https://eventregistry.org/api/v1/article/getArticles"
@@ -78,7 +78,7 @@ def get_page(query_params: dict, page: int):
     query_params["articlesPage"] = page
 
     # Pull down the data, do basic checks and instantiate the data object from request
-    r = requests.get(ENDPOINT, params=query_params)
+    r = requests.post(ENDPOINT, json=query_params)
     r.raise_for_status()
     data = r.json()["articles"]
 
@@ -86,12 +86,15 @@ def get_page(query_params: dict, page: int):
 
 
 def main(args=args):
-
+    """Main function to pull data from newsapi.ai and save to a local json file.
+    Args:
+        args (argparse.Namespace, optional): The parsed arguments from argparse. Defaults to args from the global parser.
+    """
     # Get API key from cli, env or dotenv
     API_KEY = get_api_key(args.api_key)
 
     # Load query parameters from JSON file
-    with open(args.query_path, "r") as file:
+    with open(args.query_json, "r") as file:
         query_params = json.load(file)
 
     # Add the API key to the query parameters
@@ -129,3 +132,7 @@ def main(args=args):
 
     with open(args.output_json, "w") as f:
         json.dump(all_articles, f, indent=4, ensure_ascii=False)
+
+
+if __name__ == "__main__":
+    main()
