@@ -30,19 +30,7 @@
                             "sourceUri": "foxnews.com"
                         },
                         {
-                            "sourceUri": "electronicintifada.net"
-                        },
-                        {
-                            "sourceUri": "middleeasteye.net"
-                        },
-                        {
                             "sourceUri": "aljazeera.com"
-                        },
-                        {
-                            "sourceUri": "jpost.com"
-                        },
-                        {
-                            "sourceUri": "haaretz.com"
                         },
                         {
                             "sourceUri": "rt.com"
@@ -54,9 +42,6 @@
                             "sourceUri": "lemonde.fr"
                         },
                         {
-                            "sourceUri": "elpais.com"
-                        },
-                        {
                             "sourceUri": "dw.com"
                         },
                         {
@@ -66,13 +51,16 @@
                             "sourceUri": "reuters.com"
                         },
                         {
-                            "sourceUri": "timesofisrael.com"
+                            "sourceUri": "thetimes.com"
                         },
                         {
-                            "sourceUri": "english.wafa.ps"
+                            "sourceUri": "english.elpais.com"
                         },
                         {
-                            "sourceUri": "thetimes.co.uk"
+                            "sourceUri": "telegraph.co.uk"
+                        },
+                        {
+                            "sourceUri": "washingtonpost.com"
                         }
                     ]
                 },
@@ -82,7 +70,9 @@
             ]
         },
         "$filter": {
-            "forceMaxDataTimeWindow": "31"
+            "forceMaxDataTimeWindow": "31",
+            "dateStart": "2025-08-25",
+            "dateEnd": "2025-09-25"
         }
     },
     "resultType": "articles",
