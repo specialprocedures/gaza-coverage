@@ -1,33 +1,36 @@
 import os
 import argparse
 import json
-
+from pathlib import Path
 import requests
 from dotenv import load_dotenv
 from tqdm import tqdm
 
 
-parser = argparse.ArgumentParser(
-    prog="pull.py",
-    description="Pulls data from newsapi.ai and saves it to a local json file.",
-)
+def parse_args():
+    parser = argparse.ArgumentParser(
+        prog="pull.py",
+        description="Pulls data from newsapi.ai and saves it to a local json file.",
+    )
 
-parser.add_argument(
-    "query_json",
-    default="query.json",
-    help="The json query in newsapi format, created via the API sandbox.",
-)
-parser.add_argument(
-    "output_json",
-    default="output.json",
-    help="The output path to which the results will be saved.",
-)
-parser.add_argument(
-    "--api_key",
-    help="Your newsapi.ai API key. Can be passed as an argument, set as an environment variable (NEWSAPI_API_KEY), or stored in a .env.",
-)
+    parser.add_argument(
+        "query_json",
+        default="query.json",
+        help="The json query in newsapi format, created via the API sandbox.",
+    )
+    parser.add_argument(
+        "output_json",
+        default="output.json",
+        help="The output path to which the results will be saved.",
+    )
+    parser.add_argument(
+        "--api_key",
+        help="Your newsapi.ai API key. Can be passed as an argument, set as an environment variable (NEWSAPI_API_KEY), or stored in a .env.",
+    )
 
-args = parser.parse_args()
+    args = parser.parse_args()
+
+    return args
 
 
 def get_api_key(args_api_key: str):
@@ -85,11 +88,18 @@ def get_page(query_params: dict, page: int):
     return data
 
 
-def main(args=args):
+def main(args):
     """Main function to pull data from newsapi.ai and save to a local json file.
     Args:
-        args (argparse.Namespace, optional): The parsed arguments from argparse. Defaults to args from the global parser.
+        args (argparse.Namespace): The parsed arguments from argparse.
     """
+
+    # check output dir exists
+    out_path = Path(args.output_json)
+
+    if not out_path.parent.exists():
+        raise FileNotFoundError(f"Output directory {out_path.parent} does not exist.")
+
     # Get API key from cli, env or dotenv
     API_KEY = get_api_key(args.api_key)
 
@@ -135,4 +145,5 @@ def main(args=args):
 
 
 if __name__ == "__main__":
-    main()
+    args = parse_args()
+    main(args=args)
