@@ -1,2 +1,3 @@
 .env
-output_old.json
+data/old/output_old.json
+data/old/output.json
