@@ -1,3 +1,6 @@
 .env
 data/old/output_old.json
 data/old/output.json
+data/quotes.json
+data/september_eng.json
+data/upload.jsonl
