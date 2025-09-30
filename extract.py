@@ -30,7 +30,7 @@ Try to present proper names as they would appear in wikipedia, where possible.
 
 There may be several or no quotes in the article, please ensure that you return all quotes. One speaker may have several quotes.
 
-Include direct quotes, e.g., "This is a quote", said the speaker, and indirect quotes, e.g. The speaker said this is a quote.
+Include direct quotes only, do not include paraphrased quotes.
 
 Here is the article:
 
