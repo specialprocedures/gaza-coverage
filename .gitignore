@@ -4,3 +4,12 @@ data/old/output.json
 data/quotes.json
 data/september_eng.json
 data/upload.jsonl
+data/old/*
+data/bbc_3_year.json
+data/newsapi/uk_2_year.json
+data/query.json
+data/newsapi/gu_te_partial.json
+data/newsapi/query.json
+data/newsapi/uk_2_year_filtered_for_llm.jsonl
+data/newsapi/uk_2_year_filtered.json
+__pycache__/
