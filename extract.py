@@ -13,20 +13,20 @@ from google.genai import types
 DEFAULT_PROMPT = """
 Extract quotes from the following article and return as structured JSON using the following fields.
     name: The full name of the person or organisation being quoted,
+            - Do not use a person's first or last name only, unless they are only referred to that way in the article.
+            - Even then, if they are famous (e.g., "Donald Trump", "Joe Biden"), always use their full name.
     organisation: The organisation represented by the speaker, 
-                  Use the full name of the organisation rather than just the acronym.
-    role: The speaker's position within that organisation.
+                  - Use the full name of the organisation rather than just the acronym.
+    role: The speaker's position within that organisation, if given in the article.
     nationality: The nationality of the speaker, if known, as a 3-letter country code e.g. USA, GBR, ISR, PLE.
                  Return an empty string if unknown.
     quote: The text of the quote, if the quote breaks across the sentence, merge it into on single quote,
     message: A summary of the quote, written so that it can be understood out of context. 
              Do not include the speaker in the message, reproduce as if it was being spoken directly.
-             Ensure that the message can be understood independently of the article, and that the subject of the message is clear. 
-             For example, do not say "The report is very important", say "The report, which is about climate change, is very important".
-             And do not say "The proposals are bad", say "The proposals, which would see taxes rise for small businesses, are bad."
-
-In the people or organisations fields, consider that the results will be bulk processed and deduplication should be minimised.
-Try to present proper names as they would appear in wikipedia, where possible.
+             Ensure that the message can be understood independently of the article, and that all subjects of the message are clear. 
+                For example:
+                    - do just not say "I agree with the government's decision", say "I agree with the German government's decision to increase funding for healthcare".
+                    - do not just say "The report is very important", say "The report, published by Greenpeace, which is about climate change, is very important".
 
 There may be several or no quotes in the article, please ensure that you return all quotes. One speaker may have several quotes.
 
@@ -143,13 +143,16 @@ def create_request(
         "key": record["uri"],
         "request": {
             "contents": [
-                {"parts": [{"text": request_text}]},
+                {"role": "user", "parts": [{"text": request_text}]},
             ],
         },
-        "config": {
-            "responseMimeType": "application/json",
-            "responseSchema": schema,
-        },
+        "generationConfig": str(
+            {
+                "responseMimeType": "application/json",
+                "responseSchema": schema,
+                "temperature": 0,
+            }
+        ),
     }
     return request_dict
 
