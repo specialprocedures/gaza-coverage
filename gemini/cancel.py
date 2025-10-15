@@ -2,7 +2,7 @@ from google import genai
 import sys
 import argparse
 
-from extract import load_api_key
+from gemini.extract import load_api_key
 
 
 def parse_args() -> argparse.Namespace:

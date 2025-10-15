@@ -1,0 +1,4 @@
+- Delete the cache and run NER again
+- All larger entities get name, orgs, roles merged into one model (pydantic? sqlalchemy)
+    - How does that model for quotes, do we take the person or org if both available?
+- How much of this is still necessary?

@@ -1,4 +1,4 @@
-from extract import load_api_key, get_processed_data, parse_args
+from gemini.extract import load_api_key, get_processed_data, parse_args
 from google import genai
 import sys
 import argparse
