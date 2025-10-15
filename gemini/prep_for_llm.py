@@ -101,8 +101,8 @@ def main(input_file: str, output_file: str):
     with open(input_file, "r", encoding="utf-8") as infile, open(
         output_file, "w", encoding="utf-8"
     ) as outfile:
-        for line in infile:
-            record = json.loads(line)
+        data = json.load(infile)
+        for record in data:
             request_dict = create_request(record)
             outfile.write(json.dumps(request_dict) + "\n")
     print(f"Processed articles from {input_file} and wrote requests to {output_file}")
