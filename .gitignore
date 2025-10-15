@@ -13,3 +13,6 @@ data/newsapi/query.json
 data/newsapi/uk_2_year_filtered_for_llm.jsonl
 data/newsapi/uk_2_year_filtered.json
 __pycache__/
+data/quotes/2_year.jsonl
+data/query.json
+cache/name_types.json
