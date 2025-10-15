@@ -1,3 +1,8 @@
+import argparse
+import json
+import os
+import sys
+
 DEFAULT_PROMPT = """
 Extract quotes from the following article and return as structured JSON using the following fields.
     name: The full name of the person or organisation being quoted,
@@ -83,3 +88,40 @@ def create_request(
         ),
     }
     return request_dict
+
+
+def main(input_file: str, output_file: str):
+    """
+    Main function to read articles from input_file, process them, and write requests to output_file.
+
+    Args:
+        input_file (str): Path to the input JSONL file containing articles.
+        output_file (str): Path to the output JSONL file for Gemini API requests.
+    """
+    with open(input_file, "r", encoding="utf-8") as infile, open(
+        output_file, "w", encoding="utf-8"
+    ) as outfile:
+        for line in infile:
+            record = json.loads(line)
+            request_dict = create_request(record)
+            outfile.write(json.dumps(request_dict) + "\n")
+    print(f"Processed articles from {input_file} and wrote requests to {output_file}")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Prepare news articles for LLM processing."
+    )
+    parser.add_argument(
+        "input_file", type=str, help="Path to the input JSONL file with articles."
+    )
+    parser.add_argument(
+        "output_file", type=str, help="Path to the output JSONL file for requests."
+    )
+    args = parser.parse_args()
+
+    if not os.path.isfile(args.input_file):
+        print(f"Error: Input file {args.input_file} does not exist.")
+        sys.exit(1)
+
+    main(args.input_file, args.output_file)
