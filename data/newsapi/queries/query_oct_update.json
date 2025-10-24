@@ -1,0 +1,42 @@
+{
+    "query": {
+        "$query": {
+            "$and": [
+                {
+                    "$or": [
+                        {
+                            "conceptUri": "http://en.wikipedia.org/wiki/Gaza"
+                        },
+                        {
+                            "conceptUri": "http://en.wikipedia.org/wiki/Gaza_Strip"
+                        },
+                        {
+                            "conceptUri": "http://en.wikipedia.org/wiki/Gaza_War"
+                        }
+                    ]
+                },
+                {
+                    "$or": [
+                        {
+                            "sourceUri": "theguardian.com"
+                        },
+                        {
+                            "sourceUri": "telegraph.co.uk"
+                        }
+                    ]
+                },
+                {
+                    "dateStart": "2025-10-06",
+                    "dateEnd": "2025-10-15",
+                    "lang": "eng"
+                }
+            ]
+        }
+    },
+    "resultType": "articles",
+    "articlesSortBy": "date",
+    "includeArticleSocialScore": true,
+    "includeArticleConcepts": true,
+    "includeArticleImage": true,
+    "apiKey": "MY_API_KEY"
+}
